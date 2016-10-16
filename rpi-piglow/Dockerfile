@@ -5,7 +5,7 @@ WORKDIR /root/
 ADD ./piglow/ ./piglow/
 
 RUN apt-get -q update
-RUN apt-get -qy install python-dev python-pip gcc make
+RUN apt-get -qy install python-dev python-pip python-smbus gcc make
 RUN pip install rpi-ws281x 
 RUN pip install Piglow
   
