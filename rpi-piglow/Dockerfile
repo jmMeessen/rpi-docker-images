@@ -5,13 +5,12 @@ WORKDIR /root/
 ADD ./piglow/ ./piglow/
 
 RUN apt-get -q update
-RUN apt-get -qy install python-dev python-pip python-smbus gcc make
-RUN pip install rpi-ws281x 
-RUN pip install Piglow
-  
+RUN apt-get -qy install python-dev python-pip python-smbus python-psutil gcc make
+
 RUN apt-get -qy remove python-dev gcc make && \
 	rm -rf /var/lib/apt/lists/* && \
 	apt-get -qy clean all
 
-#CMD ["python2", "./piglow/python/examples/cycle.py"]
+WORkDIR /root/piglow
+CMD ["python2", "./cpu.py"]
 
