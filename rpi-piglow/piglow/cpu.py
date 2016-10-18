@@ -1,19 +1,22 @@
-##########################################################
-## Show your current CPU usage on your PiGlow!          ##
-##                                                      ##
-## Requires psutil - sudo apt-get install python-psutil ##
-##                                                      ##
-## Example by Jason - @Boeeerb                          ##
-##########################################################
-
-from piglow import PiGlow
+import signal
 from time import sleep
+import sys
+from piglow import PiGlow
 import psutil
 
-piglow = PiGlow()
+class GracefulKiller:
+  kill_now = False
+  def __init__(self):
+    signal.signal(signal.SIGINT, self.exit_gracefully)
+    signal.signal(signal.SIGTERM, self.exit_gracefully)
 
-while True:
+  def exit_gracefully(self,signum, frame):
+    self.kill_now = True
 
+if __name__ == '__main__':
+  killer = GracefulKiller()
+  piglow = PiGlow()
+  while True:
     cpu = psutil.cpu_percent()
     piglow.all(0)
 
@@ -39,4 +42,10 @@ while True:
         piglow.blue(20)
     else:
         piglow.all(20)
+    if killer.kill_now:
+      break
     sleep(0.2)
+
+  print "End of the program. I was killed gracefully :)"
+  piglow.all(0)
+
