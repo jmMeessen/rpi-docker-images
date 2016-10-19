@@ -1,16 +1,12 @@
+# Pimoroni's Piglow enabled image for Raspberry Pi
 
 FROM alexellis2/python-gpio-arm:armv6
 
+MAINTAINER Jean-Marc MEESSEN <jean-marc@meessen-web.org>
+
 WORKDIR /root/
-ADD ./piglow/ ./piglow/
-
-RUN apt-get -q update
-RUN apt-get -qy install python-dev python-pip python-smbus python-psutil gcc make
-
-RUN apt-get -qy remove python-dev gcc make && \
-	rm -rf /var/lib/apt/lists/* && \
-	apt-get -qy clean all
-
-WORkDIR /root/piglow
-CMD ["python2", "./cpu.py"]
-
+RUN apt-get -q update && \
+    apt-get -qy install python-dev python-pip python-smbus python-psutil gcc make && \
+    apt-get -qy remove python-dev gcc make && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get -qy clean all
