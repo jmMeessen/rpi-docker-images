@@ -1,0 +1,18 @@
+I2C and SPI requiered
+
+in /boot/config.txt
+dtparam=i2c1=on
+dtparam=spi=on
+dtparam=i2c_arm=on
+
+in /etc/modules
+i2c-dev
+i2c-bcm2708
+spi-bcm2708
+
+    apt-get update
+    
+    apt-get install python-pip python-rpi.gpio python-spidev python-smbus
+
+
+
