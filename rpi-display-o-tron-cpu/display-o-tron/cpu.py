@@ -35,4 +35,6 @@ if __name__ == '__main__':
       break
     sleep(0.3)
 
+  print "End of the program. I was killed gracefully :)"
+  backlight.graph_off()
 
